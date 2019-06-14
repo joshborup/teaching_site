@@ -42,7 +42,13 @@ const userSchema = mongoose.Schema({
       },
       message: "you must choose another password"
     }
-  }
+  },
+  saved_courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "course"
+    }
+  ]
 });
 
 module.exports = mongoose.model("user", userSchema);

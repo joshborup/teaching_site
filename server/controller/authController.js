@@ -5,10 +5,8 @@ module.exports = {
   registerUser: async (req, res, next) => {
     const { email, username, password } = req.body;
 
-    const salt = await bcrypt.genSalt(12).catch(err => console.log(err));
-    const hashedPassword = await bcrypt
-      .hash(password, salt)
-      .catch(err => console.log(err));
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = new User({
       username,
@@ -21,7 +19,11 @@ module.exports = {
       } else {
         const authenticatedUser = await User.find({ username })
           .select({ username: 1, email: 1 })
-          .catch(err => res.status(400).send("incorrect username/password"));
+          .populate({
+            path: "saved_course",
+            select: ["title", "description", "image", "link"]
+          });
+
         req.session.user = authenticatedUser[0];
         res.status(200).send(req.session.user);
       }
@@ -41,6 +43,10 @@ module.exports = {
       if (passwordsMatch) {
         const authenticatedUser = await User.find({ username })
           .select({ username: 1, email: 1 })
+          .populate({
+            path: "saved_courses",
+            select: ["title", "description", "image", "link"]
+          })
           .catch(err => res.status(400).send("incorrect username/password"));
         req.session.user = authenticatedUser[0];
         res.status(200).send(req.session.user);
@@ -53,6 +59,7 @@ module.exports = {
   },
 
   userInfo: (req, res, next) => {
+    console.log(req.session.user);
     res.status(200).send(req.session.user);
   },
   logout: (req, res, next) => {

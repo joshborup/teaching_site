@@ -17,7 +17,7 @@ export function Layout({
     justifyContent: justifyContent || "center",
     alignItems: alignItems || "center",
     flexDirection: flexDirection || "row",
-    margin: margin || "0px auto 0",
+    margin: margin || "90px auto 0",
     padding: padding || "20px 10px",
     minHeight: "100vh"
   };

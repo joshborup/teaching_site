@@ -4,13 +4,24 @@ const app = express();
 const session = require("express-session");
 app.use(express.json());
 const mongoose = require("mongoose");
-const { get, post, put, deleteItem } = require("./controller/controller");
+const {
+  get,
+  post,
+  put,
+  deleteItem,
+  getCourseById
+} = require("./controller/userCoursesController");
 const {
   login,
   registerUser,
   userInfo,
   logout
 } = require("./controller/authController");
+
+const {
+  adminGetById,
+  adminGetAll
+} = require("./controller/adminCoursesController");
 const { SERVER_PORT, CONNECTION_STRING_LOCAL, SESSION_SECRET } = process.env;
 
 app.use(
@@ -43,14 +54,28 @@ app.post("/api/login", login);
 app.get("/api/user", userInfo);
 app.get("/api/logout", logout);
 
-// data endpoints
+// User Course Endpoints
 app
-  .route("/api")
+  .route("/api/user/course")
   .get(get)
   .post(post);
 
 app
-  .route("/api/:id")
+  .route("/api/user/course/:id")
+  .put(put)
+  .delete(deleteItem);
+
+// Admin Course Endpoints
+app.get("/api/courses", get);
+
+app
+  .route("/api/admin/course")
+  .get(adminGetAll)
+  .post(post);
+
+app
+  .route("/api/admin/course/:id")
+  .get(adminGetById)
   .put(put)
   .delete(deleteItem);
 

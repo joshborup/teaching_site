@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 export default function FetchUser(url) {
-  const user = useSelector(({ user }) => user);
+  const user = useSelector(({ userDux }) => userDux.user);
 
   const dispatch = useDispatch();
   function getUser() {

@@ -1,0 +1,80 @@
+.course-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  > div:last-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .course-card {
+    .course-card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      button {
+        border: none;
+        cursor: pointer;
+      }
+      .star {
+        height: 30px;
+        width: 30px;
+      }
+
+      .star.chosen {
+        // fill: rgb(0, 195, 255);
+        fill: rgb(255, 157, 0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+    }
+    height: 280px;
+    width: 330px;
+    border-radius: 5px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-content: center;
+    flex-direction: column;
+    transition: 0.3s;
+    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.331),
+      1px 4px 15px rgba(0, 0, 0, 0.1);
+
+    > * + * {
+      margin: 10px 0;
+    }
+
+    .course-card-image {
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 100%;
+      }
+    }
+    button:not(.save-on-card) {
+      @extend %base-button;
+      height: 35px;
+      width: 100%;
+      background: rgb(0, 195, 255);
+      color: white;
+    }
+  }
+  .course-card:hover {
+    box-shadow: 1px 7px 9px rgba(0, 0, 0, 0.431),
+      1px 7px 25px rgba(0, 0, 0, 0.2);
+  }
+}

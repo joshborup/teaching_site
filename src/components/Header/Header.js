@@ -18,16 +18,13 @@ function LoggedInLinks({ setToggle, toggle }) {
       }
     >
       <NavLink onClick={setToggle} to="/">
-        Home
+        Courses
       </NavLink>
-      <NavLink onClick={setToggle} to="/page1">
-        Page 1
+      <NavLink onClick={setToggle} to="/resources">
+        Resources
       </NavLink>
-      <NavLink onClick={setToggle} to="/page2">
-        Page 2
-      </NavLink>
-      <NavLink onClick={setToggle} to="/page3">
-        Page 3
+      <NavLink onClick={setToggle} to="/account">
+        Account
       </NavLink>
       <button onClick={logout}>Logout</button>
     </div>
@@ -35,7 +32,7 @@ function LoggedInLinks({ setToggle, toggle }) {
 }
 
 function Header(props) {
-  const user = useSelector(state => state.user);
+  const user = useSelector(({ userDux: user }) => user);
   const [toggle, setToggle] = useState(false);
   return (
     <header className="main-header">

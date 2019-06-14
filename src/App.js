@@ -3,16 +3,21 @@ import Header from "./components/Header/Header";
 import { Switch, Route } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { useSelector } from "react-redux";
-import CustomView from "./components/CustomView/CustomView";
+import CourseView from "./components/Course/Course";
+import Resources from "./components/Resources/Resources";
+import Account from "./components/Account/Account";
 import Home from "./components/Home/Home";
 import AuthContainer from "./components/Auth/AuthContainer";
 import userFetch from "./hooks/fetchUser";
+import SingleCourse from "./components/SingleCourse/SingleCourse";
+import axios from "axios";
 
 import "./App.scss";
 
 function App() {
   userFetch("/api/user");
-  const user = useSelector(state => state.user);
+
+  const user = useSelector(({ userDux }) => userDux.user);
   return (
     <div className="App">
       {user ? (
@@ -24,38 +29,54 @@ function App() {
               path="/"
               render={() => {
                 return (
-                  <Layout flexDirection="column" className="home-container">
-                    <Home />
+                  <Layout
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    className="home-container"
+                  >
+                    <CourseView />
                   </Layout>
                 );
               }}
             />
             <Route
-              path="/page1"
+              path="/account"
               render={() => {
                 return (
-                  <Layout flexDirection="column" className="home-container">
-                    <CustomView page="1" />
+                  <Layout
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    className="home-container"
+                  >
+                    <Account />
                   </Layout>
                 );
               }}
             />
             <Route
-              path="/page2"
+              path="/resources"
               render={() => {
                 return (
-                  <Layout flexDirection="column" className="home-container">
-                    <CustomView page="2" />
+                  <Layout
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    className="home-container"
+                  >
+                    <Resources />
                   </Layout>
                 );
               }}
             />
             <Route
-              path="/page3"
+              path="/course/:id"
               render={() => {
                 return (
-                  <Layout flexDirection="column" className="home-container">
-                    <CustomView page="3" />
+                  <Layout
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    className="home-container"
+                  >
+                    <SingleCourse />
                   </Layout>
                 );
               }}

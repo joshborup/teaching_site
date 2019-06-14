@@ -75,14 +75,26 @@
           button {
             @extend %base-button;
             width: 100%;
+
             border: none;
-            color: white;
-            background: $accent;
+            color: black;
+            background: rgb(231, 231, 231);
           }
           .active {
             background: white;
             color: #333;
           }
+        }
+
+        div .log.active {
+          border-right: solid 1px black;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        div .reg.active {
+          border-left: solid 1px black;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
         }
       }
 
@@ -100,6 +112,7 @@
   color: white;
   align-self: flex-end;
   margin: 10px 0;
+
   > div {
     display: flex;
     justify-content: center;
