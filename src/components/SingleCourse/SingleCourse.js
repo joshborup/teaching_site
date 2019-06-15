@@ -10,6 +10,7 @@ function SingleCourse(props) {
       .catch(err => console.log(err));
     setCourse(course.data);
   }
+
   useEffect(() => {
     let current = true;
 
@@ -21,6 +22,7 @@ function SingleCourse(props) {
       current = false;
     };
   }, []);
+
   const { title, description } = course;
   return (
     <div>

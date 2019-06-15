@@ -259,7 +259,10 @@ function Banner({ mainMessage, subMessage }) {
 function AuthPageContainer() {
   return (
     <div className="auth-container">
-      <Banner mainMessage="Title" subMessage="Sub title/Call to action" />
+      <Banner
+        mainMessage="Learn Programming"
+        subMessage="Learn how to program umm like super quick hehe!"
+      />
       <div className="login">
         <div>
           <AuthContainer />

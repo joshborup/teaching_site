@@ -46,7 +46,8 @@ const userSchema = mongoose.Schema({
   saved_courses: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "course"
+      ref: "course",
+      unique: true
     }
   ]
 });

@@ -11,9 +11,12 @@ function Save({ id, saved }) {
 
   async function saveCourse() {
     const savedCourse = await axios
-      .put(`/api/user/course/${id}`)
+      .put(`/api/user/course/${id}?star=${!toggle}`)
       .catch(err => console.log(err));
-    dispatch({ type: "SET_USER", payload: savedCourse });
+    dispatch({
+      type: "SET_USER_SAVED_COURSES",
+      payload: savedCourse.data.saved_courses
+    });
     setToggle(!toggle);
   }
   return (
@@ -29,35 +32,38 @@ function Save({ id, saved }) {
   );
 }
 
-export default function CourseView(props) {
-  const [courses, setCourses] = fetchCourse("/api/courses");
-  const user = useSelector(({ userDux: user }) => user.user);
-  console.log("this part", user);
-  const mappedCourses = courses.map(course => {
-    const mappedUserCourses =
-      user.saved_courses && user.saved_courses.length
-        ? user.saved_courses.map(course => {
-            return course._id;
-          })
-        : [];
-    return (
-      <div className="course-card" key={course._id}>
-        <div className="course-card-title">
-          <h2>{course.title}</h2>
-          <Save
-            saved={mappedUserCourses.includes(course._id)}
-            id={course._id}
-          />
-        </div>
-        <div className="course-card-image">
-          <img src={course.image} />
-        </div>
-        <div>{course.description}</div>
-        <Link to={`/course/${course._id}`}>
-          <button>Start Learning</button>
-        </Link>
+export function Course({ course, user }) {
+  const mappedUserCourses =
+    user.saved_courses && user.saved_courses.length
+      ? user.saved_courses.map(course => {
+          return course._id;
+        })
+      : [];
+
+  const { title, _id, image, description } = course;
+
+  return (
+    <div className="course-card" key={_id}>
+      <div className="course-card-title">
+        <h2>{title}</h2>
+        <Save saved={mappedUserCourses.includes(_id)} id={_id} />
       </div>
-    );
+      <div className="course-card-image">
+        <img src={image} alt="" />
+      </div>
+      <div>{description}</div>
+      <Link to={`/course/${_id}`}>
+        <button>Start Learning</button>
+      </Link>
+    </div>
+  );
+}
+
+export default function CourseView(props) {
+  const [courses] = fetchCourse("/api/courses");
+  const user = useSelector(({ userDux: user }) => user.user);
+  const mappedCourses = courses.map(course => {
+    return <Course key={course._id} course={course} user={user} />;
   });
   return (
     <div className="course-container">

@@ -1,5 +1,10 @@
 .auth-container {
   display: flex;
+  background: linear-gradient(rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.14)),
+    url("./components/Auth/placeholder-bg.jpg");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
   justify-content: center;
   min-height: 100vh;
   .banner {
@@ -8,7 +13,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: rgb(240, 240, 240);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 1px 1px 2px black;
   }
 
   .login {

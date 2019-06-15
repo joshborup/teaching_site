@@ -6,11 +6,9 @@ import { useSelector } from "react-redux";
 import CourseView from "./components/Course/Course";
 import Resources from "./components/Resources/Resources";
 import Account from "./components/Account/Account";
-import Home from "./components/Home/Home";
 import AuthContainer from "./components/Auth/AuthContainer";
 import userFetch from "./hooks/fetchUser";
 import SingleCourse from "./components/SingleCourse/SingleCourse";
-import axios from "axios";
 
 import "./App.scss";
 

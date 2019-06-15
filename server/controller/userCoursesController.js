@@ -8,12 +8,19 @@ module.exports = {
   getUserById: () => {},
   put: async (req, res, next) => {
     const { id } = req.params;
-    console.log(id);
-
+    let { star } = req.query;
+    star = JSON.parse(star);
+    console.log(typeof star);
     const { _id } = req.session.user;
     const user = await User.findById(_id).catch(err => console.log(err));
+    if (star) {
+      user.saved_courses.push(id);
+    } else {
+      let index = user.saved_courses.indexOf(id);
+      console.log(index);
+      user.saved_courses.splice(index, 1);
+    }
 
-    user.saved_courses.push(id);
     user.save(async err => {
       if (err) {
         console.log(err);

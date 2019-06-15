@@ -18,7 +18,7 @@ export default function FetchCourse(url) {
         dispatch({ type: "SET_COURSES", payload: res.data });
       })
       .catch(err => console.log(err));
-  }, [dispatch]);
+  }, [dispatch, url]);
   console.log(courses);
   return [courses, getCourses];
 }
