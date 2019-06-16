@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import fetchCourse from "../../hooks/fetchCourse";
-import { MdStar, MdStarBorder } from "react-icons/md";
+import { MdStar, MdStarBorder, MdSearch } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -62,12 +62,30 @@ export function Course({ course, user }) {
 export default function CourseView(props) {
   const [courses] = fetchCourse("/api/courses");
   const user = useSelector(({ userDux: user }) => user.user);
-  const mappedCourses = courses.map(course => {
+  const [search, setSearch] = useState("");
+  const filteredCourse = courses
+    ? courses.filter(item => {
+        console.log(item);
+        return item.title.toLowerCase().includes(search.toLowerCase());
+      })
+    : null;
+
+  const mappedCourses = filteredCourse.map(course => {
     return <Course key={course._id} course={course} user={user} />;
   });
   return (
     <div className="course-container">
-      <h1>Course View</h1>
+      <h1>Course Search</h1>
+      <div className="course-search">
+        <div>
+          <MdSearch />
+        </div>{" "}
+        <input
+          value={search}
+          onChange={({ target: { value } }) => setSearch(value)}
+        />
+      </div>
+      <div className="separator" />
       <div>{mappedCourses}</div>
     </div>
   );

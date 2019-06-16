@@ -32,7 +32,7 @@ function LoggedInLinks({ setToggle, toggle }) {
 }
 
 function Header(props) {
-  const user = useSelector(({ userDux: user }) => user);
+  const user = useSelector(({ userDux }) => userDux.user);
   const [toggle, setToggle] = useState(false);
   return (
     <header className="main-header">

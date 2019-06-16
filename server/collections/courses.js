@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const contentSchema = require("./courseContent");
 const coursesSchema = mongoose.Schema({
   title: {
     type: String,
@@ -16,6 +16,11 @@ const coursesSchema = mongoose.Schema({
   },
   link: {
     type: String,
+    required: true
+  },
+  content: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "content",
     required: true
   }
 });

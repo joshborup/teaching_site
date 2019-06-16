@@ -6,11 +6,15 @@
   > div:last-child {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
     height: 100%;
     width: 100%;
+
+    @media (max-width: 800px) {
+      justify-content: center;
+    }
   }
   h1 {
     text-align: center;
@@ -28,11 +32,13 @@
       .star {
         height: 30px;
         width: 30px;
+        stroke-width: 0px;
       }
 
       .star.chosen {
         // fill: rgb(0, 195, 255);
-        fill: rgb(255, 157, 0);
+        fill: #eac950;
+        stroke-width: 1px;
       }
     }
 
@@ -40,7 +46,7 @@
       text-align: center;
     }
     height: 280px;
-    width: 330px;
+    width: 315px;
     border-radius: 5px;
     margin: 15px;
     display: flex;
@@ -70,12 +76,47 @@
       @extend %base-button;
       height: 35px;
       width: 100%;
-      background: rgb(0, 195, 255);
+      background: linear-gradient(90deg, rgb(70, 70, 70), rgb(53, 53, 53));
       color: white;
     }
   }
   .course-card:hover {
     box-shadow: 1px 7px 9px rgba(0, 0, 0, 0.431),
       1px 7px 25px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.course-container {
+  .separator {
+    border-bottom: 2px rgb(212, 212, 212) solid;
+    margin: 15px 0 10px;
+  }
+  .course-search {
+    align-self: center;
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > div {
+      font-size: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    padding-bottom: 10px;
+    input {
+      width: 15%;
+      transition: 0.7s;
+      transition-timing-function: ease-in-out;
+      border-radius: 20px;
+      padding-left: 10px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    input:focus {
+      width: 100%;
+    }
   }
 }

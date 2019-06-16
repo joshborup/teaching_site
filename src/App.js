@@ -44,6 +44,7 @@ function App() {
                   <Layout
                     flexDirection="column"
                     justifyContent="flex-start"
+                    alignItems="initial"
                     className="home-container"
                   >
                     <Account />

@@ -52,7 +52,7 @@ input:focus {
 }
 
 .logo {
-  width: 80px;
+  width: 100px;
 
   img {
     width: 100%;
@@ -62,4 +62,6 @@ input:focus {
 @import "./components/Header/Header.scss";
 @import "./components/Auth/Auth.scss";
 @import "./components/Home/Home.scss";
+@import "./components/SingleCourse/SingleCourse";
 @import "./components/Course/Course.scss";
+@import "./components/Account/Account.scss";

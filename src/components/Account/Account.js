@@ -1,6 +1,32 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Course } from "../Course/Course";
+import testImage from "./test.jpg";
+
+export function Avatar({ image, username, email }) {
+  console.log(username);
+  return (
+    <div className="avatar-container">
+      <div className="img-container">
+        <img src={testImage} />
+      </div>
+
+      <span className="name">{username}</span>
+      <span className="email">{email}</span>
+    </div>
+  );
+}
+
+function UserSideBar() {
+  const user = useSelector(({ userDux }) => userDux.user);
+  console.log(user);
+  return (
+    <div>
+      <Avatar {...user} />
+      <div>User Data Here</div>
+    </div>
+  );
+}
 
 export default function Account() {
   const user = useSelector(({ userDux: user }) => user.user);
@@ -12,9 +38,9 @@ export default function Account() {
       : [];
 
   return (
-    <div>
+    <div className="account-container">
+      <UserSideBar />
       <div className="account-saved-course-container">
-        <h1>Account</h1>
         <div>{mappedUserCourses}</div>
       </div>
     </div>

@@ -45,6 +45,7 @@ function Login({ className }) {
   return (
     <form onSubmit={e => e.preventDefault()} className={className}>
       <div>
+        <label>Username</label>
         <input
           placeholder="Username"
           autoFocus={true}
@@ -54,6 +55,7 @@ function Login({ className }) {
         />
       </div>
       <div>
+        <label>Password</label>
         <input
           placeholder="Password"
           type={showPassword ? "text" : "password"}
@@ -62,12 +64,14 @@ function Login({ className }) {
           onChange={({ target: { value } }) => setPassword(value)}
         />
         <div className="show-password">
-          <input
-            type="checkbox"
-            checked={showPassword}
-            onChange={() => setShowPassword(!showPassword)}
-          />
-          <label>Show Password</label>
+          <label>
+            <input
+              type="checkbox"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+            Show Password
+          </label>
         </div>
       </div>
       <Button
@@ -146,7 +150,9 @@ function Register({ className }) {
   }, [password, secondTimePassword]);
   return (
     <form onSubmit={e => e.preventDefault()} className={className}>
+      <h2>Start Coding</h2>
       <div>
+        <label>Username</label>
         <input
           placeholder="Username"
           autoComplete="username"
@@ -156,6 +162,7 @@ function Register({ className }) {
         />
       </div>
       <div>
+        <label>Email</label>
         <input
           placeholder="you@example.com"
           type="email"
@@ -165,6 +172,7 @@ function Register({ className }) {
         />
       </div>
       <div>
+        <label>Password</label>
         <input
           type="password"
           placeholder="Password"
@@ -174,6 +182,7 @@ function Register({ className }) {
         />
       </div>
       <div>
+        <label>Confirm Password</label>
         <input
           type="password"
           placeholder="Confirm Password"
@@ -251,8 +260,10 @@ function AuthContainer() {
 function Banner({ mainMessage, subMessage }) {
   return (
     <div className="banner">
-      <h1>{mainMessage}</h1>
-      <h2>{subMessage}</h2>
+      <div>
+        <h1>{mainMessage}</h1>
+        <h2>{subMessage}</h2>
+      </div>
     </div>
   );
 }
@@ -261,7 +272,7 @@ function AuthPageContainer() {
     <div className="auth-container">
       <Banner
         mainMessage="Learn Programming"
-        subMessage="Learn how to program umm like super quick hehe!"
+        subMessage="[BUILD::THE::FUTURE]"
       />
       <div className="login">
         <div>

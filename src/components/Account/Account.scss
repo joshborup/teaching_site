@@ -1,0 +1,53 @@
+.account-container {
+  display: flex;
+  flex-direction: row;
+
+  .account-saved-course-container {
+    > div {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  flex: 1;
+  > div:first-child {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .avatar-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      .email {
+        margin: 5px 0;
+      }
+    }
+    .img-container {
+      width: 100%;
+      box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.39),
+        1px 3px 15px rgba(0, 0, 0, 0.103);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      img {
+        width: 100%;
+      }
+    }
+    .name {
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+  > div:last-child {
+    flex: 4;
+  }
+}
