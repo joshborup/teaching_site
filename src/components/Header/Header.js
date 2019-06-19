@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import Logo from "../Shared/Logo";
 import axios from "axios";
 
-function LoggedInLinks({ setToggle, toggle }) {
+function LoggedInLinks({ setToggle, toggle, user }) {
   const dispatch = useDispatch();
+
   function logout() {
     axios.get("/api/logout").then(() => {
       dispatch({ type: "SET_USER", payload: null });
@@ -26,13 +28,21 @@ function LoggedInLinks({ setToggle, toggle }) {
       <NavLink onClick={setToggle} to="/account">
         Account
       </NavLink>
-      <button onClick={logout}>Logout</button>
+      {user.admin && (
+        <NavLink onClick={setToggle} to="/admin">
+          Admin
+        </NavLink>
+      )}
+      <NavLink to="/" onClick={logout}>
+        Logout
+      </NavLink>
     </div>
   );
 }
 
 function Header(props) {
   const user = useSelector(({ userDux }) => userDux.user);
+
   const [toggle, setToggle] = useState(false);
   return (
     <header className="main-header">
@@ -48,7 +58,11 @@ function Header(props) {
         </button>
         <div>
           {user ? (
-            <LoggedInLinks setToggle={() => setToggle(false)} toggle={toggle} />
+            <LoggedInLinks
+              user={user}
+              setToggle={() => setToggle(false)}
+              toggle={toggle}
+            />
           ) : null}
         </div>
       </div>

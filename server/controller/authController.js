@@ -18,7 +18,7 @@ module.exports = {
         res.status(400).send(err);
       } else {
         const authenticatedUser = await User.find({ username })
-          .select({ username: 1, email: 1 })
+          .select({ username: 1, email: 1, admin: 1 })
           .populate({
             path: "saved_course",
             select: ["title", "description", "image", "link"]
@@ -42,7 +42,7 @@ module.exports = {
 
       if (passwordsMatch) {
         const authenticatedUser = await User.find({ username })
-          .select({ username: 1, email: 1 })
+          .select({ username: 1, email: 1, admin: 1 })
           .populate({
             path: "saved_courses",
             select: ["title", "description", "image", "link"]
@@ -58,9 +58,20 @@ module.exports = {
     }
   },
 
-  userInfo: (req, res, next) => {
-    console.log(req.session.user);
-    res.status(200).send(req.session.user);
+  userInfo: async (req, res, next) => {
+    const { user } = req.session;
+    if (user) {
+      const { _id } = user;
+      const foundUser = await User.findById(_id);
+      if (foundUser) {
+        req.session.user.admin = user.admin;
+        res.status(200).send(req.session.user);
+      } else {
+        res.status(400).end();
+      }
+    } else {
+      res.end();
+    }
   },
   logout: (req, res, next) => {
     req.session.destroy();

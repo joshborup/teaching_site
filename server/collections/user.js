@@ -43,6 +43,7 @@ const userSchema = mongoose.Schema({
       message: "you must choose another password"
     }
   },
+  admin: { type: Boolean, required: true, default: false },
   saved_courses: [
     {
       type: mongoose.Schema.Types.ObjectId,

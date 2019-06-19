@@ -16,11 +16,10 @@ function SingleCourse(props) {
   const [sectionSeconds, setSectionSeconds] = useState(0);
   async function getCourse() {
     const course = await axios
-      .get(`/api/admin/course/${props.match.params.id}`)
+      .get(`/api/courses/${props.match.params.id}`)
       .catch(err => console.log(err));
     setCourse(course.data);
   }
-
   useEffect(() => {
     let current = true;
 
@@ -40,17 +39,21 @@ function SingleCourse(props) {
     setYoutube(event.target);
   }
 
-  function setTime(time) {}
-
-  const { title, description, link } = course;
-  console.log(sectionSeconds);
+  const { title, description, link, content } = course;
+  console.log(course);
   return (
     <div className="single-course-container">
       <h1>{title}</h1>
-      <input
-        type="number"
-        onChange={({ target: { value } }) => youtube.seekTo(value)}
-      />
+
+      {content &&
+        content.sections.map(section => {
+          return (
+            <button onClick={() => youtube.seekTo(section.timestamp)}>
+              {section.section}
+            </button>
+          );
+        })}
+
       <div className="link-container">
         {link ? (
           <YouTube

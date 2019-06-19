@@ -13,10 +13,11 @@ function Save({ id, saved }) {
     const savedCourse = await axios
       .put(`/api/user/course/${id}?star=${!toggle}`)
       .catch(err => console.log(err));
-    dispatch({
-      type: "SET_USER_SAVED_COURSES",
-      payload: savedCourse.data.saved_courses
-    });
+    if (savedCourse)
+      dispatch({
+        type: "SET_USER_SAVED_COURSES",
+        payload: savedCourse.data.saved_courses
+      });
     setToggle(!toggle);
   }
   return (

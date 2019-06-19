@@ -38,6 +38,7 @@ function Login({ className }) {
       })
       .catch(err => {
         setLoading(false);
+
         customeErrMessage(setMessage, err.response.data);
       });
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header/Header";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { useSelector } from "react-redux";
 import CourseView from "./components/Course/Course";
@@ -9,6 +9,7 @@ import Account from "./components/Account/Account";
 import AuthContainer from "./components/Auth/AuthContainer";
 import userFetch from "./hooks/fetchUser";
 import SingleCourse from "./components/SingleCourse/SingleCourse";
+import Admin from "./components/Admin/Admin";
 
 import "./App.scss";
 
@@ -16,6 +17,7 @@ function App() {
   userFetch("/api/user");
 
   const user = useSelector(({ userDux }) => userDux.user);
+
   return (
     <div className="App">
       {user ? (
@@ -78,6 +80,24 @@ function App() {
                     <SingleCourse />
                   </Layout>
                 );
+              }}
+            />
+            {user.admin && (
+              <Route
+                path="/admin"
+                render={() => {
+                  return (
+                    <Layout>
+                      <Admin />
+                    </Layout>
+                  );
+                }}
+              />
+            )}
+            <Route
+              path="*"
+              render={() => {
+                return <Redirect to="/" />;
               }}
             />
           </Switch>

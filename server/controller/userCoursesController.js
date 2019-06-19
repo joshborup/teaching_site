@@ -5,10 +5,20 @@ module.exports = {
     const courses = await Course.find({}).catch(err => console.log(err));
     res.status(200).send(courses);
   },
-  getUserById: () => {},
+  getUserCourseById: async (req, res, next) => {
+    const { id } = req.params;
+    const courses = await Course.findById(id)
+      .populate({
+        path: "content",
+        select: ["sections", "repo_link"]
+      })
+      .catch(err => console.log(err));
+    res.status(200).send(courses);
+  },
   put: async (req, res, next) => {
     const { id } = req.params;
     let { star } = req.query;
+    console.log(id, star);
     star = JSON.parse(star);
     console.log(typeof star);
     const { _id } = req.session.user;
@@ -19,6 +29,7 @@ module.exports = {
       let index = user.saved_courses.indexOf(id);
       console.log(index);
       user.saved_courses.splice(index, 1);
+      console.log(user);
     }
 
     user.save(async err => {
@@ -27,7 +38,7 @@ module.exports = {
         res.status(400).send(err);
       } else {
         const users = await User.findById(_id)
-          .select({ username: 1, email: 1 })
+          .select({ username: 1, email: 1, admin: 1 })
           .populate({
             path: "saved_courses",
             select: ["title", "description", "image", "link"]

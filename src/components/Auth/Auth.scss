@@ -1,16 +1,15 @@
 .auth-container {
   display: flex;
-  background: linear-gradient(
-      135deg,
-      rgba(90, 90, 90, 0.5),
-      rgba(53, 53, 53, 0.5)
-    ),
-    url("./components/Auth/javascript-logo.svg");
+  background: url("./components/Auth/javascript-logo.svg");
   background-size: cover;
-  background-position: center center;
+  background-position: -450px -700px;
   background-repeat: no-repeat;
   justify-content: center;
   min-height: 100vh;
+  form span:last-child {
+    color: white;
+  }
+
   .banner {
     flex: 2;
     display: flex;
@@ -33,10 +32,19 @@
         3px 3px 0 #000;
     }
     h2 {
-      font-size: 44px;
-      font-size: 22px;
-      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-        1px 1px 0 #000;
+      color: rgb(241, 88, 16);
+      font-size: 74px;
+      text-shadow: -1px -1px 0 rgb(183, 33, 253), 1px -1px 0 rgb(183, 33, 253),
+        -1px 1px 0 rgb(183, 33, 253), 1px 1px 0 rgb(183, 33, 253);
+    }
+
+    @media (max-width: 800px) {
+      h1 {
+        font-size: 82px;
+      }
+      h2 {
+        font-size: 55px;
+      }
     }
   }
 
@@ -94,11 +102,9 @@
     align-items: flex-start;
 
     .login-register-container {
-      background: linear-gradient(180deg, rgb(43, 43, 43), rgb(48, 48, 48));
+      background: black;
       border-radius: 7px;
       width: 350px;
-      box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.397),
-        1px 4px 17px rgba(0, 0, 0, 0.1);
 
       h2 {
         color: white;
@@ -154,10 +160,11 @@
 
         input {
           background-color: rgb(78, 78, 78);
-          border: 2px solid white;
-          color: white;
+          color: black;
+          border: none;
           font-weight: 500;
           font-size: 20px;
+          background-color: #e7f0fe;
         }
 
         button,
@@ -170,6 +177,7 @@
 
   @media (max-width: 800px) {
     flex-direction: column;
+    background-position: -300px -200px;
   }
 }
 
