@@ -1,14 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Course } from "../Course/Course";
+import { MdFileUpload } from "react-icons/md";
+import ClourdinaryHook from "../../hooks/cloudinaryHook";
+
 import testImage from "./test.jpg";
 
-export function Avatar({ image, username, email }) {
-  console.log(username);
+export function Avatar({ userImage, username, email }) {
+  const [uploadedImage, handleImageUpload] = ClourdinaryHook(
+    "/api/user-image-signing"
+  );
+  console.log(userImage);
   return (
     <div className="avatar-container">
       <div className="img-container">
-        <img src={testImage} />
+        <img src={userImage} />
+        <input
+          type="file"
+          className="upload-image"
+          onChange={e => handleImageUpload(e.target.files)}
+        />
       </div>
 
       <span className="name">{username}</span>
@@ -23,7 +34,6 @@ function UserSideBar() {
   return (
     <div>
       <Avatar {...user} />
-      <div>User Data Here</div>
     </div>
   );
 }

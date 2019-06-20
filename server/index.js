@@ -4,13 +4,18 @@ const app = express();
 const session = require("express-session");
 app.use(express.json());
 const mongoose = require("mongoose");
-const { sessionCheck } = require("./middlewares/middlewares");
+const {
+  sessionCheck,
+  adminSessionCheck,
+  signatureForUserImage
+} = require("./middlewares/middlewares");
 const {
   get,
   post,
   put,
   deleteItem,
-  getUserCourseById
+  getUserCourseById,
+  updateUserImage
 } = require("./controller/userCoursesController");
 const {
   login,
@@ -22,7 +27,8 @@ const {
 const {
   adminGetById,
   adminGetAll,
-  adminPost
+  adminPost,
+  adminDelete
 } = require("./controller/adminCoursesController");
 const { SERVER_PORT, CONNECTION_STRING_LOCAL, SESSION_SECRET } = process.env;
 
@@ -58,6 +64,8 @@ app.get("/api/courses", get);
 app.use(sessionCheck);
 app.get("/api/logout", logout);
 app.get("/api/courses/:id", getUserCourseById);
+app.get("/api/user-image-signing", signatureForUserImage);
+app.put("/api/imageupdate", updateUserImage);
 // User Course Endpoints
 
 app.post("/api/user/course", post);
@@ -68,7 +76,7 @@ app
   .delete(deleteItem);
 
 // Admin Course Endpoints
-
+app.use(adminSessionCheck);
 app
   .route("/api/admin/course")
   .get(adminGetAll)
@@ -78,7 +86,7 @@ app
   .route("/api/admin/course/:id")
 
   .put(put)
-  .delete(deleteItem);
+  .delete(adminDelete);
 
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`server listening on ${port}`));

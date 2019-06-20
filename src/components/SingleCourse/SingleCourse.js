@@ -44,24 +44,29 @@ function SingleCourse(props) {
   return (
     <div className="single-course-container">
       <h1>{title}</h1>
+      <div className="video-chapter-container">
+        <div className="link-container">
+          {link ? (
+            <YouTube
+              videoId={link.split("v=")[1].substring(0, 11)}
+              opts={opts}
+              onReady={_onReady}
+            />
+          ) : null}
+        </div>
 
-      {content &&
-        content.sections.map(section => {
-          return (
-            <button onClick={() => youtube.seekTo(section.timestamp)}>
-              {section.section}
-            </button>
-          );
-        })}
-
-      <div className="link-container">
-        {link ? (
-          <YouTube
-            videoId={link.split("v=")[1].substring(0, 11)}
-            opts={opts}
-            onReady={_onReady}
-          />
-        ) : null}
+        <div className="button-container">
+          <div>
+            {content &&
+              content.sections.map(section => {
+                return (
+                  <button onClick={() => youtube.seekTo(section.timestamp)}>
+                    {section.section}
+                  </button>
+                );
+              })}
+          </div>
+        </div>
       </div>
       <div>{description}</div>
     </div>

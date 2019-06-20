@@ -44,7 +44,7 @@ module.exports = {
   },
   adminUpdate: (req, res, next) => {},
   adminDelete: async (req, res, next) => {
-    const { id } = req.body;
+    const { id } = req.params;
     const deletedCourse = await Course.findByIdAndDelete(id);
     console.log(deletedCourse);
     const courses = await Course.find({}).catch(err => console.log(err));

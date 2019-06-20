@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -13,6 +14,8 @@ function LoggedInLinks({ setToggle, toggle, user }) {
       dispatch({ type: "SET_USER", payload: null });
     });
   }
+
+  console.log("jit");
   return (
     <div
       className={
@@ -29,7 +32,7 @@ function LoggedInLinks({ setToggle, toggle, user }) {
         Account
       </NavLink>
       {user.admin && (
-        <NavLink onClick={setToggle} to="/admin">
+        <NavLink onClick={setToggle} to="/admin/classview">
           Admin
         </NavLink>
       )}
@@ -42,7 +45,15 @@ function LoggedInLinks({ setToggle, toggle, user }) {
 
 function Header(props) {
   const user = useSelector(({ userDux }) => userDux.user);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get("/api/user")
+      .then(res => {
+        dispatch({ type: "SET_USER", payload: res.data });
+      })
+      .catch(err => console.log(err));
+  }, []);
   const [toggle, setToggle] = useState(false);
   return (
     <header className="main-header">

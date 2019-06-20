@@ -273,7 +273,7 @@ function AuthPageContainer() {
     <div className="auth-container">
       <Banner
         mainMessage="Learn Programming"
-        subMessage="[BUILD::THE::FUTURE]"
+        subMessage="[BUILD<THE/>FUTURE]"
       />
       <div className="login">
         <div>

@@ -87,7 +87,7 @@ function App() {
                 path="/admin"
                 render={() => {
                   return (
-                    <Layout>
+                    <Layout alignItems="flex-start">
                       <Admin />
                     </Layout>
                   );

@@ -50,6 +50,24 @@ module.exports = {
       }
     });
   },
+  updateUserImage: async (req, res) => {
+    const { uploadedImage } = req.body;
+    const user = await User.findById(req.session.user._id);
+
+    console.log("uploaded image", uploadedImage);
+    user.userImage = uploadedImage;
+    user.save(async err => {
+      const updatedUser = await User.findById(req.session.user._id)
+        .select({ username: 1, email: 1, admin: 1, userImage: 1 })
+        .populate({
+          path: "saved_courses",
+          select: ["title", "description", "image", "link"]
+        })
+        .catch(err => res.status(400).send("incorrect username/password"));
+      req.session.user = user;
+      res.status(200).send(updatedUser);
+    });
+  },
   post: (req, res, next) => {
     res.status(200).send("put live");
   },

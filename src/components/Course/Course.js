@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import fetchCourse from "../../hooks/fetchCourse";
 import { MdStar, MdStarBorder, MdSearch } from "react-icons/md";
@@ -33,7 +33,8 @@ function Save({ id, saved }) {
   );
 }
 
-export function Course({ course, user }) {
+export function Course({ course }) {
+  const user = useSelector(({ userDux }) => userDux.user);
   const mappedUserCourses =
     user.saved_courses && user.saved_courses.length
       ? user.saved_courses.map(course => {
@@ -63,7 +64,9 @@ export function Course({ course, user }) {
 export default function CourseView(props) {
   const [courses] = fetchCourse("/api/courses");
   const user = useSelector(({ userDux: user }) => user.user);
+
   const [search, setSearch] = useState("");
+
   const filteredCourse = courses
     ? courses.filter(item => {
         console.log(item);

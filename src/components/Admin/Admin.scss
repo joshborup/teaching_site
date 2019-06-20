@@ -1,0 +1,120 @@
+.admin-nav-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  a {
+    margin: 0 10px;
+    font-size: 34px;
+    @extend %base-button;
+    align-self: flex-end;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+  }
+}
+.admin-course-view {
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    border-bottom: dotted 3px black;
+    span {
+      font-size: 34px;
+    }
+  }
+}
+
+.upload-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.admin-total-container {
+  width: 100%;
+}
+
+.admin-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    flex: 1;
+
+    .seekerbutton {
+      @extend %base-button;
+      align-self: flex-end;
+      background-color: black;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px 0;
+      width: 100%;
+    }
+  }
+
+  > div {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    .add-class-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 500px;
+      width: 100%;
+
+      h2 {
+        margin-bottom: 15px;
+      }
+
+      input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      > div {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        width: 100%;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+    button {
+      @extend %base-button;
+      align-self: flex-end;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+    }
+  }
+}

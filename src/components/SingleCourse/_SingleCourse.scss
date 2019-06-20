@@ -3,7 +3,41 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
+  .video-chapter-container {
+    display: flex;
+    margin: 20px 0;
+    flex-direction: row;
+    justify-content: center;
 
+    @media (max-width: 800px) {
+      flex-direction: column;
+
+      .link-container {
+        width: 100%;
+        iframe {
+          width: 100%;
+        }
+      }
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0 20px;
+      flex: 1;
+      > div {
+        flex: 1;
+        padding: 0 10px;
+      }
+
+      button {
+        width: 100%;
+        background-color: black;
+        color: white;
+        margin: 5px 0;
+      }
+    }
+  }
   h1 {
     text-align: center;
   }

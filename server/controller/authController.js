@@ -18,7 +18,7 @@ module.exports = {
         res.status(400).send(err);
       } else {
         const authenticatedUser = await User.find({ username })
-          .select({ username: 1, email: 1, admin: 1 })
+          .select({ username: 1, email: 1, admin: 1, userImage: 1 })
           .populate({
             path: "saved_course",
             select: ["title", "description", "image", "link"]
@@ -42,7 +42,7 @@ module.exports = {
 
       if (passwordsMatch) {
         const authenticatedUser = await User.find({ username })
-          .select({ username: 1, email: 1, admin: 1 })
+          .select({ username: 1, email: 1, admin: 1, userImage: 1 })
           .populate({
             path: "saved_courses",
             select: ["title", "description", "image", "link"]

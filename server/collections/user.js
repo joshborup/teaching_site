@@ -43,6 +43,12 @@ const userSchema = mongoose.Schema({
       message: "you must choose another password"
     }
   },
+  userImage: {
+    type: String,
+    required: true,
+    default:
+      "https://res.cloudinary.com/saturnslist/image/upload/v1559169067/spn6gpvgy6cjdr53uxy5.jpg"
+  },
   admin: { type: Boolean, required: true, default: false },
   saved_courses: [
     {
