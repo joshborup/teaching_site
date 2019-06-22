@@ -3,18 +3,19 @@ import { useSelector } from "react-redux";
 import { Course } from "../Course/Course";
 import { MdFileUpload } from "react-icons/md";
 import ClourdinaryHook from "../../hooks/cloudinaryHook";
+import loader from "./giphy.gif";
 
 import testImage from "./test.jpg";
 
 export function Avatar({ userImage, username, email }) {
-  const [uploadedImage, handleImageUpload] = ClourdinaryHook(
+  const [uploadedImage, handleImageUpload, loading] = ClourdinaryHook(
     "/api/user-image-signing"
   );
   console.log(userImage);
   return (
     <div className="avatar-container">
       <div className="img-container">
-        <img src={userImage} />
+        {loading ? <img src={loader} /> : <img src={userImage} />}
         <input
           type="file"
           className="upload-image"

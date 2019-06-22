@@ -5,6 +5,7 @@ const base_url = "https://api.cloudinary.com/v1_1/saturnslist/image/upload";
 
 export default function CloudinaryHook(url) {
   const [uploadedImage, setUploadedImage] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   function handleImageUpload(file) {
     axios.get(url).then(response => {
@@ -21,7 +22,7 @@ export default function CloudinaryHook(url) {
       // for(var pair of formData.entries()) {
       //     console.log(pair);
       //  }
-
+      setLoading(true);
       axios
         .post(base_url, formData)
         .then(res => {
@@ -34,13 +35,15 @@ export default function CloudinaryHook(url) {
             .put("/api/imageupdate", { uploadedImage: res.data.secure_url })
             .then(res => {
               dispatch({ type: "SET_USER", payload: res.data });
+              setLoading(false);
             });
         })
         .catch(err => {
           console.log(err);
+          setLoading(false);
         });
     });
   }
 
-  return [uploadedImage, handleImageUpload];
+  return [uploadedImage, handleImageUpload, loading];
 }
